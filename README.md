@@ -104,6 +104,30 @@ gh pr create --fill
 gh pr checks
 ```
 
+### Submodules
+
+```bash
+# add another GitHub repository as a submodule
+git submodule add https://github.com/USER/SUBMODULE_REPO.git path/to/submodule
+
+# commit the new submodule link and .gitmodules file
+git add .gitmodules path/to/submodule
+git commit -m "Add submodule"
+
+# clone a repository and include all submodules
+git clone --recurse-submodules https://github.com/USER/REPO.git
+
+# initialize submodules after a normal clone
+git submodule update --init --recursive
+
+# update one submodule to the newest commit from its tracked branch
+git submodule update --remote path/to/submodule
+
+# commit the updated submodule pointer in the parent repo
+git add path/to/submodule
+git commit -m "Update submodule"
+```
+
 ## Conda Environments
 
 ### Setup and Channels

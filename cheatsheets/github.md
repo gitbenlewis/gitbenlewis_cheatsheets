@@ -73,6 +73,41 @@ git pull --rebase
 git branch -vv
 ```
 
+## Submodules
+
+```bash
+# add another GitHub repository as a submodule
+git submodule add https://github.com/USER/SUBMODULE_REPO.git path/to/submodule
+
+# commit the new submodule link and .gitmodules file
+git add .gitmodules path/to/submodule
+git commit -m "Add submodule"
+
+# clone a repository and include all submodules
+git clone --recurse-submodules https://github.com/USER/REPO.git
+
+# initialize submodules after a normal clone
+git submodule update --init --recursive
+
+# show submodule status and commit pointers
+git submodule status
+
+# update one submodule to the newest commit from its tracked branch
+git submodule update --remote path/to/submodule
+
+# update all submodules to newest commits from tracked branches
+git submodule update --remote --recursive
+
+# manually update a submodule from inside its folder
+cd path/to/submodule
+git pull
+cd -
+
+# commit the updated submodule pointer in the parent repo
+git add path/to/submodule
+git commit -m "Update submodule"
+```
+
 ## Branches
 
 ```bash
