@@ -120,8 +120,17 @@ git clone --recurse-submodules https://github.com/USER/REPO.git
 # initialize submodules after a normal clone
 git submodule update --init --recursive
 
-# update one submodule to the newest commit from its tracked branch
-git submodule update --remote path/to/submodule
+# one-time setup: make a submodule follow a specific branch
+git config -f .gitmodules submodule.SUBMODULE_NAME.branch main
+git submodule sync --recursive
+git add .gitmodules
+git commit -m "Track submodule main branch"
+
+# update one submodule to the newest commit from its tracked branch and merge it
+git submodule update --remote --merge path/to/submodule
+
+# update all submodules to newest commits from tracked branches
+git submodule update --remote --merge --recursive
 
 # commit the updated submodule pointer in the parent repo
 git add path/to/submodule

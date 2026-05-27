@@ -92,11 +92,23 @@ git submodule update --init --recursive
 # show submodule status and commit pointers
 git submodule status
 
-# update one submodule to the newest commit from its tracked branch
-git submodule update --remote path/to/submodule
+# one-time setup: make a submodule follow a specific branch
+git config -f .gitmodules submodule.SUBMODULE_NAME.branch main
+git submodule sync --recursive
+git add .gitmodules
+git commit -m "Track submodule main branch"
+
+# update one submodule to the newest commit from its tracked branch and merge it
+git submodule update --remote --merge path/to/submodule
 
 # update all submodules to newest commits from tracked branches
-git submodule update --remote --recursive
+git submodule update --remote --merge --recursive
+
+# example: update a PyOncoplot submodule from the parent repo
+git submodule update --remote --merge code_library/PyOncoplot
+git add code_library/PyOncoplot
+git commit -m "Update PyOncoplot submodule"
+git push
 
 # manually update a submodule from inside its folder
 cd path/to/submodule
